@@ -1,3 +1,4 @@
+require('./db/connect') //import mongoose 
 const express = require('express')
 const app = express()
 const taskRoutes = require('./routers/tasks')
