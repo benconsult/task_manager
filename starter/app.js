@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const taskRoutes = require('./routers/tasks')
 const connectDB = require('./db/connect') //import mongoose 
+require('dotenv').config() //in-built for env variable
 //middleware to get out json
 app.use(express.json())
 
@@ -22,7 +23,7 @@ const port = 3000
 const start = async () => {
     //use the try catch block for async await
     try{
-       await connectDB() //if successful, then the next line
+       await connectDB(process.env.MONGO_URI) //if successful, then the next line
        app.listen(port, console.log(`server is running on port ${port}`))
     }catch(error){
         console.log(error)
