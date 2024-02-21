@@ -32,10 +32,15 @@ const getTask = async (req,res) =>{
     }catch(error){
         res.status(500).json({ msg:error })
     }
-   
 }
-const updateTask = (req,res) =>{
-    res.send('update a tsk')
+//with id and request body
+const updateTask = async (req,res) =>{
+    try {
+        const {id: taskID} = req.params
+        res.status(200).json({id:taskID, data:req.body})
+    } catch (error) {
+        
+    }
 }
 //Async await
 const deleteTask = async (req,res) =>{
