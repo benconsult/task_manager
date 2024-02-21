@@ -1,9 +1,17 @@
 const Task = require('../models/task')
 
-const getAllTasks = (req,res)=>{
-        res.send('All Items from the file')
+//Async await
+const getAllTasks = async (req,res)=>{
+    try{
+        const tasks =  await Task.find({})
+        res.status(200).json({tasks})
+        //alternatively res.status(200).json({tasks:tasks})
+    }catch(error){
+        res.status(500).json(error)
+    }
+       
 }
-//using Async await for creating a task
+//using Async await for creating a task. Document/Table is Task
 const createTask = async (req,res) =>{
     try{
          const task = await Task.create(req.body)
