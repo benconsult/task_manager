@@ -1,41 +1,35 @@
 const Task = require('../models/task')
+const asyncWrapper = require('../middleware/async')
 
 //Async await
-const getAllTasks = async (req,res)=>{
-    try{
+const getAllTasks = asyncWrapper(async (req,res)=>{
+    
         const tasks =  await Task.find({})
-       res.status(200).json({tasks})   
-        
-    }catch(error){
-        res.status(500).json(error)
-    }
+       res.status(200).json({tasks})    
        
-}
+})//ends asyncWrapper
+
 //using Async await for creating a task. Document/Table is Task
-const createTask = async (req,res) =>{
-    try{
+const createTask = asyncWrapper(async (req,res) =>{
+    
          const task = await Task.create(req.body)
          res.status(201).json({task})
-}catch(error){
-     res.status(500).json({ msg:error })
-}
-}
+})
+
 //async await
-const getTask = async (req,res) =>{
-    try{
+const getTask = asyncWrapper(async (req,res) =>{
+    
         const {id:taskID} = req.params
         const task = await Task.findOne({_id:taskID})
         if(!task){
             return res.status(404).json({msg:`No task with id ${taskID}`})
         }
         res.json({ task })
-    }catch(error){
-        res.status(500).json({ msg:error })
-    }
-}
+    
+})
 //update with id and request body
-const updateTask = async (req,res) =>{
-    try {
+const updateTask = asyncWrapper(async (req,res) =>{
+    
         const {id: taskID} = req.params
 
         const task = await Task.findByIdAndUpdate({_id:taskID}, req.body, {
@@ -45,13 +39,11 @@ const updateTask = async (req,res) =>{
             return res.status(404).json({msg:`No task with id ${taskID}`})
         }
         res.status(200).json({id:taskID, data:req.body})
-    } catch (error) {
-        res.status(500).json({ msg:error })
-    }
-}
+    
+})
 //Testing put vs patch with a new method for put request
-const editTask = async (req,res) =>{
-    try {
+const editTask = asyncWrapper(async (req,res) =>{
+    
         const {id: taskID} = req.params
 
         const task = await Task.findByIdAndUpdate({_id:taskID}, req.body, {
@@ -61,13 +53,11 @@ const editTask = async (req,res) =>{
             return res.status(404).json({msg:`No task with id ${taskID}`})
         }
         res.status(200).json({id:taskID, data:req.body})
-    } catch (error) {
-        res.status(500).json({ msg:error })
-    }
-}
+})
+
 //Async await
-const deleteTask = async (req,res) =>{
-    try {
+const deleteTask = asyncWrapper(async (req,res) =>{
+   
         const {id:taskID} = req.params
         const task = await Task.findByIdAndDelete({_id:taskID})
         if(!task){
@@ -77,9 +67,7 @@ const deleteTask = async (req,res) =>{
         //res.status(200).json({ task:null, status: 'success'})
         //res.status(200).send()
         res.status(200).json({ task })
-    } catch (error) {
-        res.status(500).json({ msg:error })
-    }
+    
   
-}
+})
 module.exports = {getAllTasks,createTask, getTask,updateTask,deleteTask, editTask}
