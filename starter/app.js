@@ -5,6 +5,8 @@ const taskRoutes = require('./routers/tasks')
 const connectDB = require('./db/connect') //import mongoose 
 require('dotenv').config() //in-built for env variable
 const notFound = require('./middleware/not_found')
+const errorHandlerMiddleware = require('./middleware/error-handler')
+
 //middleware for out static folder
 app.use(express.static('./public'))
 
@@ -16,6 +18,7 @@ app.use('/api/v1/tasks', taskRoutes)
 
 //middleware for not found page
 app.use(notFound)
+app.use(errorHandlerMiddleware)
 
 // app.get('/hello',(req,res)=>{
 //     res.send('Task Manager')
