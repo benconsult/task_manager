@@ -4,6 +4,10 @@ const app = express()
 const taskRoutes = require('./routers/tasks')
 const connectDB = require('./db/connect') //import mongoose 
 require('dotenv').config() //in-built for env variable
+
+//middleware for out static folder
+app.use(express.static('./public'))
+
 //middleware to get out json
 app.use(express.json())
 
@@ -12,6 +16,7 @@ app.get('/hello',(req,res)=>{
 })
 
 //middleware for task route
+
 app.use('/api/v1/tasks', taskRoutes)
 
 
