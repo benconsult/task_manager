@@ -4,16 +4,7 @@ const Task = require('../models/task')
 const getAllTasks = async (req,res)=>{
     try{
         const tasks =  await Task.find({})
-        //other response types
-        //res.status(200).json({ success: true , data:tasks})
-        //res.status(200).json({ success: true , tasks})
-        //res.status(200).json([{ data:tasks, amount: tasks.length}])
-        //res.status(200).json({ tasks, amount: tasks.length})
-        //res.status(200).json({ data:{tasks} , amount: tasks.length})
-        //res.status(200).json({ data:{tasks, nbHits:tasks.length} })
-        res.status(200).json({ status: "success", data:{tasks, nbHits:tasks.length} })
-       // res.status(200).json({tasks})
-        //alternatively res.status(200).json({tasks:tasks})
+       res.status(200).json({tasks})   
         
     }catch(error){
         res.status(500).json(error)

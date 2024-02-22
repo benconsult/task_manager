@@ -4,20 +4,25 @@ const app = express()
 const taskRoutes = require('./routers/tasks')
 const connectDB = require('./db/connect') //import mongoose 
 require('dotenv').config() //in-built for env variable
-
+const notFound = require('./middleware/not_found')
 //middleware for out static folder
 app.use(express.static('./public'))
 
 //middleware to get out json
 app.use(express.json())
 
-app.get('/hello',(req,res)=>{
-    res.send('Task Manager')
-})
-
 //middleware for task route
-
 app.use('/api/v1/tasks', taskRoutes)
+
+//middleware for not found page
+app.use(notFound)
+
+// app.get('/hello',(req,res)=>{
+//     res.send('Task Manager')
+// })
+
+
+
 
 
 
