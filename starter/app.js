@@ -24,14 +24,9 @@ app.use(errorHandlerMiddleware)
 //     res.send('Task Manager')
 // })
 
-
-
-
-
-
-
-
-const port = 3000
+//port variable in case of prod environment
+const port = process.env.PORT || 3000
+//const port = 3000
 //Async await for Db to spin the server
 const start = async () => {
     //use the try catch block for async await
