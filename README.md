@@ -1,5 +1,5 @@
 # task_manager
-A task management application with cloud data persistence built with node.js
+A task management application build with CRUD functionailities
 
 Technologies: MongoDB Atlas, Express.js, Node.js, Mongoose.js
 
